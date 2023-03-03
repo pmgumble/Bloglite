@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+</br>
+<!-- <h2> YOu seached for: <em>{{ searched }}</em></h2> -->
+<p></p>
+</br>
+<form method="POST" action="{{ url_for(('search_user')) }}" class="d-flex" role="search">
+    {{ form.hidden_tag() }}
+    <input class="form-control me-2" type="search" placeholder="Search_user" aria-label="Search_user" name="searched">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
+  </form>
+</br>
+
+{% if users %}
+
+
+{% for user in users %}
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <h2>{{ user.username }}</h2>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+Sorry, Search term: <strong>{{ searched }}</strong> was not found.
+
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,363 @@
+openapi: 3.0.0
+info:
+  title: BlogLite
+  description: Mordern Application Developement Project 1
+  version: 1.0.0
+servers:
+  - url: http://192.168.1.7:8080
+paths:
+  /api/users/{username}:
+    description: End point to read, update and delete a User resource with username = username
+    get:
+      description: Operation to Read user information.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: sachin
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                  title: Users
+                  type: object
+                  properties:
+                    "id":
+                      type: integer
+                      example: 1
+                    "name":
+                      type: string
+                      example: sachin
+                    "email":
+                       type: string
+                       example: sachin@abc.com
+                    "about_author":
+                       type: string
+                       example: etc
+                    "date_added": 
+                       type: string
+                       example: 2023-01-09 16:40:19.253474
+                        
+        '500':
+          description: Internal Server Error
+        '404':
+          description: user not found
+
+
+/api/users:
+    description: End point to add a user resource 
+    post:
+      description: Operation to add user.
+#       parameters:
+
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: sachin
+                name:
+                  type: string
+                  example: sachin
+                email:
+                  type: string
+                  example: sachin@sachin.con
+                password:
+                  type: string
+                  example: sachin
+
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: Users
+                type: object
+                properties:
+                  "usernamr":
+                     type: string
+                     example: sachin
+                  "email":
+                      type: string
+                      example: sachin@sachin.com
+                  "name":
+                       type: string
+                       example: sachin
+                       
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Category not found
+
+
+/api/users/{username}:
+    put:
+      description: Operation to update the User.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: sachin
+            
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: sachin
+                email:
+                  type: string
+                  example: sachin@sachin.con
+                password:
+                  type: string
+                  example: sachin
+                  
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                  title: Users
+                  type: object
+                  properties:
+                    "id":
+                      type: string
+                      example: '1'
+                    "name":
+                      type: string
+                      example: sachin
+                    "email":
+                       type: string
+                       example: sachin@abc.com
+                    "about_author":
+                       type: string
+                       example: etc
+                    "date_added": 
+                       type: string
+                       example: 2023-01-09 16:40:19.25347
+        '500':
+           description: Internal Server Error
+        '404':
+           description: Category not found 
+
+
+/api/users/{username}:
+    delete:
+      description: Operation to update the User.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: sachin
+      responses:
+        '200':
+          description: Request Successful
+        
+        '500':
+           description: Internal Server Error
+        '404':
+           description: Category not found
+           
+
+
+
+
+/api/users/{user_id}/post:
+     get:
+       description: Operation to view the Posts.
+       parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+       responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                  title: Posts
+                  type: object
+                  properties:
+                    "id":
+                      type: integer
+                      example: 1
+                    "title":
+                      type: string
+                      example: My Blog Posts
+                    "content":
+                       type: string
+                       example: Log contents as lines by lines and so on
+                    "slug":
+                       type: string
+                       example: HASHTAG
+                    "poster_id": 
+                       type: integer
+                       example: 20
+        
+        '500':
+          description: Internal Server Error
+        '404':
+          description: user not found
+          
+          
+/api/users/<int:user_id>/post/<int:post_id>:
+    put:
+        description: Operation to Edit the Posts by user.
+        parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+          name: post_id
+          required: true
+          schema:
+            type: integer
+            example: 10 
+            
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: This is test Post
+                  content:
+                    type: string
+                    example: Content of the blog post in detail. 
+                  slug:
+                    type: string
+                    example: Hastag
+                    
+        responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                  title: Posts
+                  type: object
+                  properties:
+                    "title":
+                      type: string
+                      example: Title of the post
+                    "content":
+                      type: string
+                      example: Main content of the post
+                    "slug":
+                       type: string
+                       example: sachin@abc.com
+
+        '500':
+           description: Internal Server Error
+        '404':
+           description: Category not found 
+
+  
+    delete:
+        description: Operation to Edit the Posts by user.
+        parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+          name: post_id
+          required: true
+          schema:
+            type: integer
+            example: 10 
+          
+        responses:
+          '200':
+            description: Request Successful
+          '500':
+            description: Internal Server Error
+          '404':
+            description: Category not found
+
+
+
+
+/api/users/<user_id/post:
+    description: End point to add a user resource 
+    post:
+      description: Operation to add user.
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: integer
+            example: 1
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Post Title
+                content:
+                  type: string
+                  example: Content of the post
+                slug:
+                  type: string
+                  example: Tag for the post
+               
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: Posts
+                type: object
+                properties:
+                  "id":
+                     type: integer
+                     example: 2
+                  "title":
+                      type: string
+                      example: Title of the post
+                  "content":
+                       type: string
+                       example: Content of the string
+                  "slug":
+                       type: string
+                       example: Tags for the post
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Category not found
+
+
+
+            
+          

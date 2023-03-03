@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+FOLLOWERS of <strong>{{ user.username}} </strong> </br>
+{% for user in users %}
+
+{% if not current_user.is_following(user) %}
+{{ user.name}}
+
+<form action="{{ url_for('follow', username=user.username) }}" method="post">
+    {{ form.hidden_tag() }}
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example" col="4" >
+    {{ form.submit(value='Follow') }}
+    </div>
+</form>
+</br>
+
+
+{% else %}
+{{ user.name }}
+
+<form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+    {{ form.hidden_tag() }}
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example" col="4" >
+    {{ form.submit(value='Unfollow') }}
+    </div>
+</form>
+</br>
+
+    <!-- <button href="{{ url_for('unfollow', username=user.username) }}" type="button" class="btn btn-outline-primary" method="post" value='Unfollow'>Unfollow</button>
+    <a href="{{ url_for('unfollow', username=user.username) }}" class="btn btn-outline-primary  btn-sm" method="POST">Unfollow</a>
+</br></br> -->
+{% endif %}
+
+<!-- <div col="8">{{ user.name}}</div>
+<div class="btn-group" role="group" aria-label="Basic mixed styles example" col="4">
+    <button type="button" class="btn btn-outline-primary">Follow</button>
+    <button type="button" class="btn btn-outline-primary">Unfollow</button>
+  </div><br><br> -->
+
+{% endfor %}
+{% endblock %} 
+
